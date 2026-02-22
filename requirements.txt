@@ -1,4 +1,15 @@
 Flask
 gunicorn
+yt-dlp
+pdf2docx
 requests
-openai
+beautifulsoup4
+rembg
+Pillow
+qrcode
+PyPDF2
+youtube-transcript-api
+gTTS
+faker
+google-generativeai
+cryptography

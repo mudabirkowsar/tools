@@ -33,10 +33,6 @@ from urllib.parse import urlparse
 
 from cryptography.fernet import Fernet
 
-from diffusers import StableDiffusionPipeline
-import torch
-import io
-from PIL import Image
 
 
 def open_tabs(url, count):
