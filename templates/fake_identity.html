@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Identity Generator - Bot Hub</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body class="bg-dark bg-gradient text-light d-flex align-items-center justify-content-center min-vh-100">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+
+                <div class="card shadow-lg rounded-4 border-0">
+                    <div class="card-body p-5 bg-dark text-light rounded-4 text-center">
+
+                        <div class="d-flex justify-content-start align-items-start mb-4">
+                            <a href="/" class="btn btn-sm btn-outline-light mb-4">
+                                <i class="fa fa-arrow-left me-1"></i> Back to Dashboard
+                            </a>
+                        </div>
+
+                        <div class="mb-3">
+                            <i class="fa-solid fa-user-secret fs-1 text-primary"></i>
+                        </div>
+
+                        <h2 class="fw-bold mb-2">Fake Identity Generator</h2>
+
+                        <p class="text-secondary mb-4">
+                            Generate random profiles for testing or privacy purposes
+                        </p>
+
+                        <!-- Identity Card -->
+                        <div class="bg-secondary bg-opacity-25 rounded-4 p-4 text-start shadow-sm mb-4">
+
+                            <p><strong><i class="fa-solid fa-user me-2 text-primary"></i>Name:</strong>
+                                <span id="fName" class="text-light ms-2">---</span>
+                            </p>
+
+                            <p><strong><i class="fa-solid fa-envelope me-2 text-primary"></i>Email:</strong>
+                                <span id="fEmail" class="text-light ms-2">---</span>
+                            </p>
+
+                            <p><strong><i class="fa-solid fa-phone me-2 text-primary"></i>Phone:</strong>
+                                <span id="fPhone" class="text-light ms-2">---</span>
+                            </p>
+
+                            <p><strong><i class="fa-solid fa-location-dot me-2 text-primary"></i>Address:</strong>
+                                <span id="fAddr" class="text-light ms-2">---</span>
+                            </p>
+
+                            <p><strong><i class="fa-solid fa-briefcase me-2 text-primary"></i>Job:</strong>
+                                <span id="fJob" class="text-light ms-2">---</span>
+                            </p>
+
+                            <p class="mb-0"><strong><i class="fa-solid fa-globe me-2 text-primary"></i>Country:</strong>
+                                <span id="fCountry" class="text-light ms-2">---</span>
+                            </p>
+
+                        </div>
+
+                        <div class="d-grid">
+                            <button onclick="generateID()" class="btn btn-primary btn-lg">
+                                <i class="fa-solid fa-arrows-rotate me-2"></i>
+                                Generate New Identity
+                            </button>
+                        </div>
+
+                        <div id="status" class="text-center mt-3"></div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function generateID() {
+            const status = document.getElementById('status');
+
+            status.innerHTML = '<div class="spinner-border text-primary me-2" role="status"></div> Generating identity...';
+
+            try {
+                const response = await fetch('/api/generate-identity', { method: 'POST' });
+                const data = await response.json();
+
+                document.getElementById('fName').innerText = data.name;
+                document.getElementById('fEmail').innerText = data.email;
+                document.getElementById('fPhone').innerText = data.phone;
+                document.getElementById('fAddr').innerText = data.address;
+                document.getElementById('fJob').innerText = data.job;
+                document.getElementById('fCountry').innerText = data.country;
+
+                status.innerHTML = '<i class="fa-solid fa-check text-success me-2"></i> Identity generated successfully!';
+            } catch (err) {
+                status.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-danger me-2"></i> Failed to generate identity.';
+            }
+        }
+    </script>
+
+</body>
+
+</html>

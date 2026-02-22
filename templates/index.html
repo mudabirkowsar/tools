@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ultimate Automation Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+    <div class="main-wrapper">
+
+        <div class="header">
+            <h1><i class="fas fa-robot"></i> Ultimate Automation Hub</h1>
+            <p>All your AI tools & automation bots in one powerful dashboard</p>
+        </div>
+
+        <!-- Search -->
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search tools...">
+            <i class="fas fa-search"></i>
+        </div>
+
+        <!-- Bot Grid -->
+        <div class="bot-grid" id="botGrid">
+
+            <div class="bot-card" onclick="location.href='/yt-viewer'">
+                <div class="bot-icon"><i class="fab fa-youtube"></i></div>
+                <h3>YouTube Viewer</h3>
+                <p>Boost watch time with multi-tab automation.</p>
+            </div>
+
+            <div class="bot-card" onclick="location.href='/downloader'">
+                <div class="bot-icon"><i class="fas fa-download"></i></div>
+                <h3>Media Downloader</h3>
+                <p>Download videos from major platforms.</p>
+            </div>
+
+            <div class="bot-card" onclick="location.href='/price-tracker'">
+                <div class="bot-icon"><i class="fas fa-tags"></i></div>
+                <h3>Price Tracker</h3>
+                <p>Track eCommerce prices instantly.</p>
+            </div>
+
+            <div class="bot-card" onclick="location.href='/bg-remover'">
+                <div class="bot-icon"><i class="fas fa-image"></i></div>
+                <h3>AI BG Remover</h3>
+                <p>Remove image backgrounds with AI.</p>
+            </div>
+
+            <div class="bot-card" onclick="location.href='/qr-generator'">
+                <div class="bot-icon"><i class="fas fa-qrcode"></i></div>
+                <h3>QR Generator</h3>
+                <p>Create QR codes for text & links.</p>
+            </div>
+
+            <div class="bot-card" onclick="location.href='/pdf-merger'">
+                <div class="bot-icon"><i class="fas fa-file-pdf"></i></div>
+                <h3>PDF Merger</h3>
+                <p>Combine multiple PDFs into one.</p>
+            </div>
+
+            <div class="bot-card" onclick="location.href='/transcript-downloader'">
+                <div class="bot-icon"><i class="fas fa-file-alt"></i></div>
+                <h3>YT Transcript</h3>
+                <p>Convert video speech into text.</p>
+            </div>
+
+            <div class="bot-card" onclick="location.href='/text-to-speech'">
+                <div class="bot-icon"><i class="fas fa-microphone"></i></div>
+                <h3>AI Speech</h3>
+                <p>Generate realistic voice audio.</p>
+            </div>
+
+            <div class="bot-card" onclick="location.href='/image-compressor'">
+                <div class="bot-icon"><i class="fas fa-compress"></i></div>
+                <h3>Image Compressor</h3>
+                <p>Reduce image size instantly.</p>
+            </div>
+
+            <div class="bot-card" onclick="location.href='/fake-identity'">
+                <div class="bot-icon"><i class="fas fa-user-secret"></i></div>
+                <h3>Fake Identity</h3>
+                <p>Create realistic testing identities.</p>
+            </div>
+
+            <div class="bot-card" onclick="location.href='/ai-writer'">
+                <div class="bot-icon"><i class="fas fa-pen-nib"></i></div>
+                <h3>AI Writer</h3>
+                <p>Generate blogs, emails & content.</p>
+            </div>
+
+            <div class="bot-card" onclick="location.href='/ip-locator'">
+                <div class="bot-icon"><i class="fas fa-globe"></i></div>
+                <h3>IP Locator</h3>
+                <p>Locate IP addresses worldwide.</p>
+            </div>
+
+            <div class="bot-card" onclick="location.href='/image-converter'">
+                <div class="bot-icon"><i class="fas fa-file-image"></i></div>
+                <h3>Image Converter</h3>
+                <p>Convert images to different formats.</p>
+            </div>
+
+            <div class="bot-card" onclick="location.href='/secret-message'">
+                <div class="bot-icon"><i class="fas fa-lock"></i></div>
+                <h3>Secret Messenger</h3>
+                <p>Encrypt & decrypt messages securely.</p>
+            </div>
+
+            <div class="bot-card" onclick="location.href='/plagiarism-checker'">
+                <div class="bot-icon"><i class="fas fa-copy"></i></div>
+                <h3>Plagiarism Checker</h3>
+                <p>Check originality of your content.</p>
+            </div>
+
+            <div class="bot-card" onclick="location.href='/instagram-bio'">
+                <div class="bot-icon"><i class="fab fa-instagram"></i></div>
+                <h3>Instagram Bio Generator</h3>
+                <p>Create stylish bios for your profile.</p>
+            </div>
+
+            <div class="bot-card" onclick="location.href='/hashtag-generator'">
+                <div class="bot-icon"><i class="fas fa-hashtag"></i></div>
+                <h3>Hashtag Generator</h3>
+                <p>Generate trending & SEO optimized hashtags.</p>
+            </div>
+
+            <div class="bot-card" onclick="location.href='/text-summarizer'">
+                <div class="bot-icon"><i class="fas fa-align-left"></i></div>
+                <h3>Text Summarizer</h3>
+                <p>Summarize long content instantly using AI.</p>
+            </div>
+
+            <div class="bot-card" onclick="location.href='/pdf-to-word'">
+                <div class="bot-icon"><i class="fas fa-file-word"></i></div>
+                <h3>PDF to Word</h3>
+                <p>Convert PDF files into editable Word documents.</p>
+            </div>
+
+
+        </div>
+
+        <script>
+            const searchInput = document.getElementById("searchInput");
+            const cards = document.querySelectorAll(".bot-card");
+
+            searchInput.addEventListener("keyup", function () {
+                const value = this.value.toLowerCase();
+
+                cards.forEach(card => {
+                    const text = card.innerText.toLowerCase();
+                    card.style.display = text.includes(value) ? "block" : "none";
+                });
+            });
+        </script>
+
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>AI Content Writer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Poppins Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="../static/style.css">
+
+</head>
+
+<body>
+
+
+    <div class="body">
+        <div class="main-card">
+            <a href="/" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <br>
+            <h1><i class="fas fa-robot"></i> AI Content Writer</h1>
+            <p class="subtitle">Generate blogs, emails, ideas, or code instantly</p>
+
+            <textarea id="promptInput" placeholder="Write a topic (e.g., Write a poem about Python code)..."></textarea>
+
+            <button onclick="generateContent()" class="btn-primary">
+                <i class="fas fa-wand-magic-sparkles"></i> Generate Content
+            </button>
+
+            <div id="loading" class="loading">
+                <i class="fas fa-spinner fa-spin"></i> Thinking... Please wait...
+            </div>
+
+            <div class="output-box" id="resultBox">
+                Result will appear here...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function generateContent() {
+            const prompt = document.getElementById("promptInput").value;
+            const resultBox = document.getElementById("resultBox");
+            const loading = document.getElementById("loading");
+
+            if (!prompt) {
+                alert("Please enter a prompt!");
+                return;
+            }
+
+            resultBox.innerText = "";
+            loading.style.display = "block";
+
+            try {
+                const response = await fetch('/api/write-content', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt: prompt })
+                });
+
+                const data = await response.json();
+                resultBox.innerText = data.result;
+            } catch (error) {
+                resultBox.innerText = "Error fetching response.";
+            } finally {
+                loading.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

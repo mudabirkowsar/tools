@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Compressor - Bot Hub</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body class="bg-dark bg-gradient text-light d-flex align-items-center justify-content-center min-vh-100">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-9">
+
+                <div class="card shadow-lg rounded-4 border-0">
+                    <div class="card-body p-5 bg-dark text-light rounded-4 text-center">
+
+                        <div class="d-flex justify-content-start align-items-start mb-4">
+                            <a href="/" class="btn btn-sm btn-outline-light mb-4">
+                                <i class="fa fa-arrow-left me-1"></i> Back to Dashboard
+                            </a>
+                        </div>
+
+                        <div class="mb-3">
+                            <i class="fa-solid fa-file-image fs-1 text-primary"></i>
+                        </div>
+
+                        <h2 class="fw-bold mb-2">Image Compressor</h2>
+
+                        <p class="text-secondary mb-4">
+                            Reduce image size without losing much quality
+                        </p>
+
+                        <div class="mb-3 text-start">
+                            <label for="imgInput" class="form-label">Select Image</label>
+                            <input type="file" id="imgInput" class="form-control form-control-lg" accept="image/*">
+                        </div>
+
+                        <div class="d-grid mb-3">
+                            <button onclick="compress()" class="btn btn-primary btn-lg">
+                                <i class="fa-solid fa-compress me-2"></i>
+                                Compress & Download
+                            </button>
+                        </div>
+
+                        <div id="status" class="text-center mt-2"></div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function compress() {
+            const file = document.getElementById('imgInput').files[0];
+            const status = document.getElementById('status');
+
+            if (!file) {
+                alert("Please select an image!");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('image', file);
+
+            status.innerHTML = '<div class="spinner-border text-primary me-2" role="status"></div> Compressing image...';
+
+            try {
+                const response = await fetch('/api/compress', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) throw new Error("Compression failed");
+
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'compressed.jpg';
+                document.body.appendChild(a);
+                a.click();
+
+                status.innerHTML = '<i class="fa-solid fa-check text-success me-2"></i> Compression successful!';
+            } catch (err) {
+                status.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-danger me-2"></i> Compression failed.';
+            }
+        }
+    </script>
+
+</body>
+
+</html>

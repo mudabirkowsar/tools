@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>YT Viewer - Bot Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        * {
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a, #020617);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .main-card {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(17, 24, 39, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            position: relative;
+        }
+
+        .back-btn {
+            color: #0dcaf0;
+            text-decoration: none;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .top-icon {
+            font-size: 50px;
+            color: #ff0000;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .sub-text {
+            text-align: center;
+            font-size: 14px;
+            color: #9ca3af;
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            background: #020617;
+            border: 1px solid #1f2933;
+            color: white;
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        .form-control::placeholder {
+            color: #6b7280;
+        }
+
+        .btn-primary-custom {
+            width: 100%;
+            margin-top: 15px;
+            background: linear-gradient(135deg, #0dcaf0, #2563eb);
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 600;
+            color: white;
+            transition: 0.3s;
+        }
+
+        .btn-primary-custom:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 15px #0dcaf0;
+        }
+
+        #res {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #22c55e;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-card">
+
+        <div class="d-flex justify-content-start align-items-start mb-4">
+            <a href="/" class="btn btn-sm btn-outline-light mb-4">
+                <i class="fa fa-arrow-left me-1"></i> Back to Dashboard
+            </a>
+        </div>
+
+        <div class="top-icon">
+            <i class="fab fa-youtube"></i>
+        </div>
+
+        <h2>YouTube Multi-Tab Viewer</h2>
+        <p class="sub-text">Automate video viewing across multiple tabs</p>
+
+        <input type="text" id="url" class="form-control mb-3" placeholder="Enter YouTube Video Link">
+
+        <input type="number" id="count" class="form-control mb-3" placeholder="Number of Tabs">
+
+        <button onclick="startBot()" class="btn-primary-custom">
+            <i class="fa-solid fa-play"></i> Start Viewer Bot
+        </button>
+
+        <p id="res"></p>
+
+    </div>
+
+    <script>
+        async function startBot() {
+            const url = document.getElementById('url').value;
+            const count = document.getElementById('count').value;
+
+            const res = await fetch('/api/run-bot', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ type: 'yt_views', url, count })
+            });
+
+            const data = await res.json();
+            document.getElementById('res').innerText = data.msg;
+        }
+    </script>
+
+</body>
+
+</html>
